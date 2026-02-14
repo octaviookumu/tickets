@@ -51,11 +51,12 @@ public class Event {
     @ManyToOne(fetch = FetchType.LAZY)
     // organizer can organize many events. LAZY is for efficiency reasons (helps combat the 'n+1 problem')
     @JoinColumn(name = "organizer_id") // will reference the id of the organizer, which is a user
-    private User organizer;
+    private User organizer; // it is typical for the many side of the relationship to have the configuration (building with JPA)
 
     // not putting the configuration/ all the info inside the event
     // it makes sense for the user to own this relationship
-    @ManyToMany(mappedBy = "attendingEvents") // specify the name of the instance variable on the User class
+    @ManyToMany(mappedBy = "attendingEvents") // Tells Hibernate: "I am not in charge of the relationship.
+    // Look at the attendingEvents field in the User class to find the configuration."
     private List<User> attendees = new ArrayList<>(); // helps prevent nullPointerExceptions
 
     @ManyToMany(mappedBy = "staffingEvents")
