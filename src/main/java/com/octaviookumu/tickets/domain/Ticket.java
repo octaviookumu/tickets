@@ -6,40 +6,38 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "ticket_type")
+@Table(name = "ticket")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class TicketType {
+public class Ticket {
 
     @Id
     @Column(name = "id", updatable = false, nullable = false)
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(name = "name", nullable = false)
-    private String name;
-
-    @Column(name = "price", nullable = false)
-    private Double price;
-
-    @Column(name = "total_available")
-    private Integer totalAvailable;
+    @Column(name = "status", nullable = false)
+    @Enumerated(EnumType.STRING) // string representations of enum in the database
+    private TicketStatusEnum status;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "event_id")
-    // name of column in our ticket_type table which references the event to which the ticket_type belongs
-    private Event event;
+    // a ticketType can have many tickets while a ticket will only have one ticketType
+    @JoinColumn(name = "ticket_type_id")
+    private TicketType ticketType;
 
-    @OneToMany(mappedBy = "ticket_type")
-    private List<Ticket> tickets = new ArrayList<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "purchaser_id")
+    private User purchaser;
+
+    // TODO: Validation
+
+    // TODO: QrCode
 
     @CreatedDate
     @Column(name = "created_at", updatable = false, nullable = false)
@@ -48,4 +46,5 @@ public class TicketType {
     @LastModifiedDate
     @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
+
 }
