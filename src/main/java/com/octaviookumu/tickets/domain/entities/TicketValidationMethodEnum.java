@@ -1,4 +1,4 @@
-package com.octaviookumu.tickets.domain;
+package com.octaviookumu.tickets.domain.entities;
 
 /**
  * Different ways a ticket can be validated

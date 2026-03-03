@@ -1,6 +1,6 @@
 package com.octaviookumu.tickets.filters;
 
-import com.octaviookumu.tickets.domain.User;
+import com.octaviookumu.tickets.domain.entities.User;
 import com.octaviookumu.tickets.repositories.UserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

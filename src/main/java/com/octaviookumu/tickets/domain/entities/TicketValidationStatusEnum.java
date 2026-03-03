@@ -1,4 +1,4 @@
-package com.octaviookumu.tickets.domain;
+package com.octaviookumu.tickets.domain.entities;
 
 /**
  * States a Ticket validation could be in
