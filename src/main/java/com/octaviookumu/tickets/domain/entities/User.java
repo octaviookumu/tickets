@@ -1,4 +1,4 @@
-package com.octaviookumu.tickets.domain;
+package com.octaviookumu.tickets.domain.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -21,7 +21,6 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class User {
 
     @Id
