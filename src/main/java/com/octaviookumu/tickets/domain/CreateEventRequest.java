@@ -9,11 +9,13 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * CreateEventRequest is used in the service layer
+ */
 @Data // safe to use because there won't be any bidirectional relationships
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateEventRequest {
-
     private String name;
     private LocalDateTime start;
     private LocalDateTime end;
