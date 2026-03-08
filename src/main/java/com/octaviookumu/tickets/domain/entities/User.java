@@ -40,8 +40,7 @@ public class User {
     // in a real system consider soft delete
     private List<Event> organizedEvents = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "attendees")
-    // different from organizedEvents (OneToMany - Many owns relationship thus has configuration).
+    @ManyToMany
     // For a (ManyToMany - there isn't a convention. Goes with whichever entity owns the relationship)
     @JoinTable(
             name = "user_attending_events",
@@ -53,7 +52,7 @@ public class User {
     // event_id - Foreign Key to the Event table
     private List<Event> attendingEvents = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "staff")
+    @ManyToMany
     @JoinTable(
             name = "user_staffing_events",
             joinColumns = @JoinColumn(name = "user_id"),
