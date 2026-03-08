@@ -5,7 +5,6 @@ import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,21 +28,21 @@ public class Event {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "start")
-    private LocalDate start;
+    @Column(name = "event_start")
+    private LocalDateTime start;
 
-    @Column(name = "end")
-    private LocalDate end;
+    @Column(name = "event_end")
+    private LocalDateTime end;
 
     @Column(name = "venue", nullable = false)
     private String venue;
 
     // when the event tickets go on sale
     @Column(name = "sales_start")
-    private LocalDate salesStart;
+    private LocalDateTime salesStart;
 
     @Column(name = "sales_end")
-    private LocalDate salesEnd;
+    private LocalDateTime salesEnd;
 
     @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING) // defaults to string (representation of the enum will be stored in the db)

@@ -1,9 +1,9 @@
 services:
   # Our PostgreSQL database
   db:
-    image: postgres:latest
+    image: postgres:16
     ports:
-      - "5432:5432"
+      - "5450:5432"
     restart: always
     environment:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
@@ -13,7 +13,7 @@ services:
     image: adminer:latest
     restart: always
     ports:
-      - 8888:8080
+      - "8888:8080"
 
   keycloak:
     image: quay.io/keycloak/keycloak:latest

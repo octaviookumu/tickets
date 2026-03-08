@@ -42,7 +42,7 @@ public class TicketType {
     // name of column in our ticket_type table which references the event to which the ticket_type belongs
     private Event event;
 
-    @OneToMany(mappedBy = "ticket_type")
+    @OneToMany(mappedBy = "ticketType", cascade = CascadeType.ALL)
     private List<Ticket> tickets = new ArrayList<>();
 
     @CreatedDate

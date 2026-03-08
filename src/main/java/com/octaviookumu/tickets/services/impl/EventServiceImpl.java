@@ -28,6 +28,8 @@ public class EventServiceImpl implements EventService {
                         String.format("User with ID '%s' not found", organizerId)
                 ));
 
+        Event eventToCreate = new Event();
+
         // get ticketTypes
         List<TicketType> ticketTypesToCreate = event.getTicketTypes().stream().map(
                 ticketType -> {
@@ -36,16 +38,17 @@ public class EventServiceImpl implements EventService {
                     ticketTypeToCreate.setPrice(ticketType.getPrice());
                     ticketTypeToCreate.setDescription(ticketType.getDescription());
                     ticketTypeToCreate.setTotalAvailable(ticketType.getTotalAvailable());
+                    ticketTypeToCreate.setEvent(eventToCreate);
                     return ticketTypeToCreate;
                 }).toList();
 
-        Event eventToCreate = new Event();
+
         eventToCreate.setName(event.getName());
-        eventToCreate.setStart(event.getStart().toLocalDate());
-        eventToCreate.setEnd(event.getEnd().toLocalDate());
+        eventToCreate.setStart(event.getStart());
+        eventToCreate.setEnd(event.getEnd());
         eventToCreate.setVenue(event.getVenue());
-        eventToCreate.setSalesStart(event.getSalesStart().toLocalDate());
-        eventToCreate.setSalesEnd(event.getSalesEnd().toLocalDate());
+        eventToCreate.setSalesStart(event.getSalesStart());
+        eventToCreate.setSalesEnd(event.getSalesEnd());
         eventToCreate.setStatus(event.getStatus());
         eventToCreate.setOrganizer(organizer);
         eventToCreate.setTicketTypes(ticketTypesToCreate); // we can rely on any cascades to create those for us
