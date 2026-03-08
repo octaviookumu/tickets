@@ -4,47 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="10e08c39-9138-4291-be06-4266304fe90c" name="Changes" comment="fix: backend fixes&#10;- add event to ticketType in service layer&#10;- make SecurityFilterChain public&#10;- update mappedBy value (TicketType entity)&#10;- remove mappedBy value (User entity)">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/octaviookumu/tickets/TicketsApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/octaviookumu/tickets/config/JpaConfiguration.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/octaviookumu/tickets/config/SecurityConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/octaviookumu/tickets/domain/CreateEventRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/octaviookumu/tickets/domain/CreateTicketTypeRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/octaviookumu/tickets/domain/controllers/EventController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/octaviookumu/tickets/domain/controllers/GlobalExceptionHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/octaviookumu/tickets/domain/dtos/CreateEventRequestDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/octaviookumu/tickets/domain/dtos/CreateEventResponseDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/octaviookumu/tickets/domain/dtos/CreateTicketTypeRequestDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/octaviookumu/tickets/domain/dtos/CreateTicketTypeResponseDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/octaviookumu/tickets/domain/dtos/ErrorDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/octaviookumu/tickets/domain/entities/Event.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/octaviookumu/tickets/domain/entities/EventStatusEnum.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/octaviookumu/tickets/domain/entities/QrCode.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/octaviookumu/tickets/domain/entities/QrCodeStatusEnum.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/octaviookumu/tickets/domain/entities/Ticket.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/octaviookumu/tickets/domain/entities/TicketStatusEnum.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/octaviookumu/tickets/domain/entities/TicketType.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/octaviookumu/tickets/domain/entities/TicketValidation.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/octaviookumu/tickets/domain/entities/TicketValidationMethodEnum.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/octaviookumu/tickets/domain/entities/TicketValidationStatusEnum.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/octaviookumu/tickets/domain/entities/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/octaviookumu/tickets/exceptions/EventTIcketException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/octaviookumu/tickets/exceptions/UserNotFoundException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/octaviookumu/tickets/filters/UserProvisioningFilter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/octaviookumu/tickets/mappers/EventMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/octaviookumu/tickets/repositories/EventRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/octaviookumu/tickets/repositories/UserRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/octaviookumu/tickets/services/EventService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/octaviookumu/tickets/services/impl/EventServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/orm.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/octaviookumu/tickets/TicketsApplicationTests.java" beforeDir="false" />
+    <list default="true" id="10e08c39-9138-4291-be06-4266304fe90c" name="Changes" comment="refactor: add code to backend folder">
+      <change beforePath="$PROJECT_DIR$/.gitattributes" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.gitattributes" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -403,7 +366,15 @@
       <option name="project" value="LOCAL" />
       <updated>1772996696297</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="refactor: add code to backend folder">
+      <option name="closed" value="true" />
+      <created>1772997504052</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1772997504053</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -411,14 +382,25 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat: update User entity with relationships to Event" />
     <MESSAGE value="feat: create TicketType entity" />
     <MESSAGE value="feat: create Ticket entity" />
     <MESSAGE value="refactor: make entity names plural" />
@@ -443,6 +425,7 @@
     <MESSAGE value="refactor: change LocalDate to LocalDateTime" />
     <MESSAGE value="refactor: change params to path" />
     <MESSAGE value="fix: backend fixes&#10;- add event to ticketType in service layer&#10;- make SecurityFilterChain public&#10;- update mappedBy value (TicketType entity)&#10;- remove mappedBy value (User entity)" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: backend fixes&#10;- add event to ticketType in service layer&#10;- make SecurityFilterChain public&#10;- update mappedBy value (TicketType entity)&#10;- remove mappedBy value (User entity)" />
+    <MESSAGE value="refactor: add code to backend folder" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: add code to backend folder" />
   </component>
 </project>
