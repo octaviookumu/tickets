@@ -3,6 +3,7 @@ package com.octaviookumu.tickets.domain.controllers;
 import com.octaviookumu.tickets.domain.CreateEventRequest;
 import com.octaviookumu.tickets.domain.dtos.CreateEventRequestDto;
 import com.octaviookumu.tickets.domain.dtos.CreateEventResponseDto;
+import com.octaviookumu.tickets.domain.dtos.GetEventDetailsResponseDto;
 import com.octaviookumu.tickets.domain.dtos.ListEventResponseDto;
 import com.octaviookumu.tickets.domain.entities.Event;
 import com.octaviookumu.tickets.mappers.EventMapper;
@@ -16,7 +17,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -62,6 +65,24 @@ public class EventController {
         Page<Event> events = eventService.listEventsForOrganizer(userId, pageable);
         Page<ListEventResponseDto> listEventResponse = events.map(eventMapper::toListEventResponseDto);
         return ResponseEntity.ok(listEventResponse);
+    }
+
+    @GetMapping("/{eventId}")
+    public ResponseEntity<GetEventDetailsResponseDto> getEvent(
+            @AuthenticationPrincipal Jwt jwt,
+            @PathVariable UUID eventId
+    ) {
+        UUID organizerId = parseUserId(jwt);
+        Event event = eventService.getEventForOrganizer(organizerId, eventId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        return ResponseEntity.ok(eventMapper.toGetEventDetailsResponseDto(event));
+
+        // I could have used the below code, but I still don't understand lambda functions that well
+        // return eventService.getEventForOrganizer(organizerId, eventId)
+        //        .map(eventMapper::toGetEventDetailsResponseDto)
+        //        .map(ResponseEntity::ok)
+        //        .orElse(ResponseEntity.notFound().build());
     }
 
     private UUID parseUserId(Jwt jwt) {
