@@ -1,6 +1,9 @@
 package com.octaviookumu.tickets.domain.controllers;
 
 import com.octaviookumu.tickets.domain.dtos.ErrorDto;
+import com.octaviookumu.tickets.exceptions.EventNotFoundException;
+import com.octaviookumu.tickets.exceptions.EventUpateException;
+import com.octaviookumu.tickets.exceptions.TicketTypeNotFoundException;
 import com.octaviookumu.tickets.exceptions.UserNotFoundException;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +20,36 @@ import java.util.List;
 @RestControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
+
+    @ExceptionHandler(EventUpateException.class)
+    public ResponseEntity<ErrorDto> handleEventUpdateException(
+            EventNotFoundException ex
+    ) {
+        log.error("Caught EventUpdateException");
+        ErrorDto errorDto = new ErrorDto();
+        errorDto.setError("Unable to update event");
+        return new ResponseEntity<>(errorDto, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(TicketTypeNotFoundException.class)
+    public ResponseEntity<ErrorDto> handleTicketTypeNotFoundException(
+            TicketTypeNotFoundException ex
+    ) {
+        log.error("Caught TicketTypeNotFoundException");
+        ErrorDto errorDto = new ErrorDto();
+        errorDto.setError("Ticket type not found");
+        return new ResponseEntity<>(errorDto, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(EventNotFoundException.class)
+    public ResponseEntity<ErrorDto> handleEventNotFoundException(
+            EventNotFoundException ex
+    ) {
+        log.error("Caught EventNotFoundException");
+        ErrorDto errorDto = new ErrorDto();
+        errorDto.setError("Event not found");
+        return new ResponseEntity<>(errorDto, HttpStatus.BAD_REQUEST);
+    }
 
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<ErrorDto> handleUserNotFoundException(
