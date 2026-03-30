@@ -2,6 +2,8 @@ package com.octaviookumu.tickets.mappers;
 
 import com.octaviookumu.tickets.domain.CreateEventRequest;
 import com.octaviookumu.tickets.domain.CreateTicketTypeRequest;
+import com.octaviookumu.tickets.domain.UpdateEventRequest;
+import com.octaviookumu.tickets.domain.UpdateTicketTypeRequest;
 import com.octaviookumu.tickets.domain.dtos.*;
 import com.octaviookumu.tickets.domain.entities.Event;
 import com.octaviookumu.tickets.domain.entities.TicketType;
@@ -30,4 +32,12 @@ public interface EventMapper {
     GetEventDetailsTicketTypesResponseDto toGetEventDetailsTicketTypesResponseDto(TicketType ticketType);
 
     GetEventDetailsResponseDto toGetEventDetailsResponseDto(Event event);
+
+    UpdateTicketTypeRequest fromDto(UpdateTicketTypeResponseDto dto);
+
+    UpdateEventRequest fromDto(UpdateEventRequestDto dto);
+
+    UpdateTicketTypeResponseDto toUpdateTicketTypeResponseDto(TicketType ticketType);
+
+    UpdateEventResponseDto toUpdateEventResponseDto(Event event);
 }
