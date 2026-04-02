@@ -1,10 +1,8 @@
 package com.octaviookumu.tickets.domain.controllers;
 
 import com.octaviookumu.tickets.domain.CreateEventRequest;
-import com.octaviookumu.tickets.domain.dtos.CreateEventRequestDto;
-import com.octaviookumu.tickets.domain.dtos.CreateEventResponseDto;
-import com.octaviookumu.tickets.domain.dtos.GetEventDetailsResponseDto;
-import com.octaviookumu.tickets.domain.dtos.ListEventResponseDto;
+import com.octaviookumu.tickets.domain.UpdateEventRequest;
+import com.octaviookumu.tickets.domain.dtos.*;
 import com.octaviookumu.tickets.domain.entities.Event;
 import com.octaviookumu.tickets.mappers.EventMapper;
 import com.octaviookumu.tickets.services.EventService;
@@ -51,6 +49,19 @@ public class EventController {
         return new ResponseEntity<>(createEventResponseDto, HttpStatus.CREATED);
     }
 
+    @PutMapping("/{eventId}")
+    public ResponseEntity<UpdateEventResponseDto> updateEvent(
+            @AuthenticationPrincipal Jwt jwt,
+            @PathVariable UUID eventId,
+            @Valid @RequestBody UpdateEventRequestDto updateEventRequestDto
+    ) {
+        UpdateEventRequest updateEventRequest = eventMapper.fromDto(updateEventRequestDto);
+        UUID userId = parseUserId(jwt);
+        Event updatedEvent = eventService.updateEventForOrganizer(userId, eventId, updateEventRequest);
+        UpdateEventResponseDto updateEventResponseDto = eventMapper.toUpdateEventResponseDto(updatedEvent);
+        return ResponseEntity.ok(updateEventResponseDto);
+    }
+
     /**
      * @param jwt      we get the id. checking authentication (who the user is)
      *                 not authorization (what they are allowed access to)
@@ -84,6 +95,7 @@ public class EventController {
         //        .map(ResponseEntity::ok)
         //        .orElse(ResponseEntity.notFound().build());
     }
+
 
     private UUID parseUserId(Jwt jwt) {
         return UUID.fromString(jwt.getSubject());
