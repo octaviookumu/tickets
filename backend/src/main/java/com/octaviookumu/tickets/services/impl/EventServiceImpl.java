@@ -155,4 +155,11 @@ public class EventServiceImpl implements EventService {
         return eventRepository.save(existingEvent);
 
     }
+
+    @Override
+    @Transactional // as we're making calls to the database
+    // NOTE: This method will not throw an exception if the organizer doesn't have access to the event
+    public void deleteEventForOrganizer(UUID organizerId, UUID eventId) {
+        getEventForOrganizer(organizerId, eventId).ifPresent(eventRepository::delete);
+    }
 }
