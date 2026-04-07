@@ -4,6 +4,7 @@ import com.octaviookumu.tickets.domain.CreateEventRequest;
 import com.octaviookumu.tickets.domain.UpdateEventRequest;
 import com.octaviookumu.tickets.domain.UpdateTicketTypeRequest;
 import com.octaviookumu.tickets.domain.entities.Event;
+import com.octaviookumu.tickets.domain.entities.EventStatusEnum;
 import com.octaviookumu.tickets.domain.entities.TicketType;
 import com.octaviookumu.tickets.domain.entities.User;
 import com.octaviookumu.tickets.exceptions.EventNotFoundException;
@@ -161,5 +162,10 @@ public class EventServiceImpl implements EventService {
     // NOTE: This method will not throw an exception if the organizer doesn't have access to the event
     public void deleteEventForOrganizer(UUID organizerId, UUID eventId) {
         getEventForOrganizer(organizerId, eventId).ifPresent(eventRepository::delete);
+    }
+
+    @Override
+    public Page<Event> listPublishedEvents(Pageable pageable) {
+        return eventRepository.findByStatus(EventStatusEnum.PUBLISHED, pageable);
     }
 }
