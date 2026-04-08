@@ -19,7 +19,6 @@ public class SecurityConfig {
             HttpSecurity http,
             UserProvisioningFilter userProvisioningFilter) throws Exception {
         http.authorizeHttpRequests(authorize ->
-
                         authorize
                                 .requestMatchers(HttpMethod.GET, "/api/v1/published-events").permitAll()
                                 // catch all rule. every request will be authenticated by default
