@@ -6,6 +6,7 @@ import com.octaviookumu.tickets.domain.UpdateEventRequest;
 import com.octaviookumu.tickets.domain.UpdateTicketTypeRequest;
 import com.octaviookumu.tickets.domain.dtos.*;
 import com.octaviookumu.tickets.domain.entities.Event;
+import com.octaviookumu.tickets.domain.entities.Ticket;
 import com.octaviookumu.tickets.domain.entities.TicketType;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
@@ -42,4 +43,8 @@ public interface EventMapper {
     UpdateEventResponseDto toUpdateEventResponseDto(Event event);
 
     ListPublishedEventResponseDto toListPublishedEventResponseDto(Event event);
+
+    GetPublishedEventDetailsTicketTypesResponseDto toGetPublishedEventDetailsTicketTypesResponseDto(TicketType ticketType);
+
+    GetPublishedEventDetailsResponseDto toGetPublishedEventDetailsResponseDto(Event event);
 }
