@@ -20,7 +20,7 @@ public class SecurityConfig {
             UserProvisioningFilter userProvisioningFilter) throws Exception {
         http.authorizeHttpRequests(authorize ->
                         authorize
-                                .requestMatchers(HttpMethod.GET, "/api/v1/published-events").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/v1/published-events/**").permitAll()
                                 // catch all rule. every request will be authenticated by default
                                 .anyRequest().authenticated())
                 .csrf(AbstractHttpConfigurer::disable)
