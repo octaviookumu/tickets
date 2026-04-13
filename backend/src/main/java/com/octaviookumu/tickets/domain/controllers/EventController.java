@@ -17,8 +17,9 @@ import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Optional;
 import java.util.UUID;
+
+import static com.octaviookumu.tickets.util.JwtUtil.parseUserId;
 
 @RestController
 @RequestMapping("/api/v1/events")
@@ -107,8 +108,5 @@ public class EventController {
         return ResponseEntity.noContent().build();
     }
 
-    private UUID parseUserId(Jwt jwt) {
-        return UUID.fromString(jwt.getSubject());
-    }
 
 }
