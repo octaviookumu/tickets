@@ -1,7 +1,7 @@
 package com.octaviookumu.tickets.domain.controllers;
 
 import com.octaviookumu.tickets.domain.dtos.ErrorDto;
-import com.octaviookumu.tickets.exceptions.UserNotFoundException;
+import com.octaviookumu.tickets.exceptions.*;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -18,10 +18,56 @@ import java.util.List;
 @Slf4j
 public class GlobalExceptionHandler {
 
+    @ExceptionHandler(TicketsSoldOutException.class)
+    public ResponseEntity<ErrorDto> handleTicketsSoldOutException(TicketsSoldOutException ex) {
+        log.error("Caught TicketsSoldOutException");
+        ErrorDto errorDto = new ErrorDto();
+        errorDto.setError("Tickets are sold out for this ticket type");
+        return new ResponseEntity<>(errorDto, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(QrCodeNotFoundException.class)
+    public ResponseEntity<ErrorDto> handleQrCodeNotFoundException(QrCodeNotFoundException ex) {
+        log.error("Caught QrCodeNotFoundException");
+        ErrorDto errorDto = new ErrorDto();
+        errorDto.setError("QR Code not found");
+        return new ResponseEntity<>(errorDto, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(QrCodeGenerationException.class)
+    public ResponseEntity<ErrorDto> handleQrCodeGenerationException(QrCodeGenerationException ex) {
+        log.error("Caught QrCodeGenerationException");
+        ErrorDto errorDto = new ErrorDto();
+        errorDto.setError("Unable to generate QR Code");
+        return new ResponseEntity<>(errorDto, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(EventUpateException.class)
+    public ResponseEntity<ErrorDto> handleEventUpdateException(EventNotFoundException ex) {
+        log.error("Caught EventUpdateException");
+        ErrorDto errorDto = new ErrorDto();
+        errorDto.setError("Unable to update event");
+        return new ResponseEntity<>(errorDto, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(TicketTypeNotFoundException.class)
+    public ResponseEntity<ErrorDto> handleTicketTypeNotFoundException(TicketTypeNotFoundException ex) {
+        log.error("Caught TicketTypeNotFoundException");
+        ErrorDto errorDto = new ErrorDto();
+        errorDto.setError("Ticket type not found");
+        return new ResponseEntity<>(errorDto, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(EventNotFoundException.class)
+    public ResponseEntity<ErrorDto> handleEventNotFoundException(EventNotFoundException ex) {
+        log.error("Caught EventNotFoundException");
+        ErrorDto errorDto = new ErrorDto();
+        errorDto.setError("Event not found");
+        return new ResponseEntity<>(errorDto, HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<ErrorDto> handleUserNotFoundException(
-            UserNotFoundException ex
-    ) {
+    public ResponseEntity<ErrorDto> handleUserNotFoundException(UserNotFoundException ex) {
         log.error("Caught UserNotFoundException", ex);
         ErrorDto errorDto = new ErrorDto();
         errorDto.setError("User not found");
@@ -29,9 +75,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ErrorDto> handleMethodArgumentNotValidException(
-            MethodArgumentNotValidException ex
-    ) {
+    public ResponseEntity<ErrorDto> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
         log.error("Caught MethodArgumentNotValidException", ex);
         ErrorDto errorDto = new ErrorDto();
 
@@ -48,9 +92,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
-    public ResponseEntity<ErrorDto> handleConstraintViolation(
-            ConstraintViolationException ex
-    ) {
+    public ResponseEntity<ErrorDto> handleConstraintViolation(ConstraintViolationException ex) {
         log.error("Caught ConstraintViolationException", ex);
         ErrorDto errorDto = new ErrorDto();
 

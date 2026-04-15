@@ -3,6 +3,7 @@ package com.octaviookumu.tickets.config;
 import com.octaviookumu.tickets.filters.UserProvisioningFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -18,8 +19,10 @@ public class SecurityConfig {
             HttpSecurity http,
             UserProvisioningFilter userProvisioningFilter) throws Exception {
         http.authorizeHttpRequests(authorize ->
-                        // catch all rule. every request will be authenticated by default
-                        authorize.anyRequest().authenticated())
+                        authorize
+                                .requestMatchers(HttpMethod.GET, "/api/v1/published-events/**").permitAll()
+                                // catch all rule. every request will be authenticated by default
+                                .anyRequest().authenticated())
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
