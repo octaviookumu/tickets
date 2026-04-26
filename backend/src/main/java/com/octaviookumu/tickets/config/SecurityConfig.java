@@ -23,6 +23,7 @@ public class SecurityConfig {
         http.authorizeHttpRequests(authorize ->
                         authorize
                                 .requestMatchers(HttpMethod.GET, "/api/v1/published-events/**").permitAll()
+                                .requestMatchers("/api/v1/events").hasRole("ORGANIZER") // user must be an organizer
                                 // catch all rule. every request will be authenticated by default
                                 .anyRequest().authenticated())
                 .csrf(AbstractHttpConfigurer::disable)
