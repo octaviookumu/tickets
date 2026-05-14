@@ -57,13 +57,13 @@ public class QrCodeServiceImpl implements QrCodeService {
 
     @Override
     public byte[] getQrCodeImageForUserAndTicket(UUID userId, UUID ticketId) {
-        QrCode qrCode = qrCodeRepository.findByTicketIdAndPurchaserId(ticketId, userId)
+        QrCode qrCode = qrCodeRepository.findByTicketIdAndTicketPurchaserId(ticketId, userId)
                 .orElseThrow(QrCodeNotFoundException::new);
 
         try {
             return Base64.getDecoder().decode(qrCode.getValue());
         } catch (IllegalArgumentException ex) {
-            log.error("Invalid base64 QR Code for ticket ID: {}", ticketId);
+            log.error("Invalid base64 QR Code for ticket ID: {}", ticketId, ex);
             throw new QrCodeNotFoundException();
         }
     }
