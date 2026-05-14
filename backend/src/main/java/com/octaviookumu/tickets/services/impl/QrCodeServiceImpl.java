@@ -9,9 +9,11 @@ import com.octaviookumu.tickets.domain.entities.QrCode;
 import com.octaviookumu.tickets.domain.entities.QrCodeStatusEnum;
 import com.octaviookumu.tickets.domain.entities.Ticket;
 import com.octaviookumu.tickets.exceptions.QrCodeGenerationException;
+import com.octaviookumu.tickets.exceptions.QrCodeNotFoundException;
 import com.octaviookumu.tickets.repositories.QrCodeRepository;
 import com.octaviookumu.tickets.services.QrCodeService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.imageio.ImageIO;
@@ -23,6 +25,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class QrCodeServiceImpl implements QrCodeService {
 
     private static final int QR_HEIGHT = 300;
@@ -50,6 +53,19 @@ public class QrCodeServiceImpl implements QrCodeService {
             throw new QrCodeGenerationException("Failed to generate QR Code", ex);
         }
 
+    }
+
+    @Override
+    public byte[] getQrCodeImageForUserAndTicket(UUID userId, UUID ticketId) {
+        QrCode qrCode = qrCodeRepository.findByTicketIdAndTicketPurchaserId(ticketId, userId)
+                .orElseThrow(QrCodeNotFoundException::new);
+
+        try {
+            return Base64.getDecoder().decode(qrCode.getValue());
+        } catch (IllegalArgumentException ex) {
+            log.error("Invalid base64 QR Code for ticket ID: {}", ticketId, ex);
+            throw new QrCodeNotFoundException();
+        }
     }
 
     private String generateQrCodeImage(UUID uniqueId) throws WriterException, IOException {
