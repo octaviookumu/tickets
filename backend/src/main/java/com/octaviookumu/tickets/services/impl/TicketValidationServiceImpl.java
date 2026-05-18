@@ -35,14 +35,15 @@ public class TicketValidationServiceImpl implements TicketValidationService {
         // get the ticket from the QR Code
         Ticket ticket = qrCode.getTicket();
 
-        return validateTicket(ticket);
+        return validateTicket(ticket, TicketValidationMethodEnum.QR_SCAN);
     }
 
-    private TicketValidation validateTicket(Ticket ticket) {
+    private TicketValidation validateTicket(
+            Ticket ticket, TicketValidationMethodEnum ticketValidationMethodEnum) {
         // create ticket validation
         TicketValidation ticketValidation = new TicketValidation();
         ticketValidation.setTicket(ticket);
-        ticketValidation.setValidationMethod(TicketValidationMethodEnum.QR_SCAN);
+        ticketValidation.setValidationMethod(ticketValidationMethodEnum);
 
         // a ticket can only be validated once
         // any further attempts to validate it will come back as invalid
@@ -62,6 +63,6 @@ public class TicketValidationServiceImpl implements TicketValidationService {
     public TicketValidation validateTicketManually(UUID ticketId) {
         Ticket ticket = ticketRepository.findById(ticketId)
                 .orElseThrow(TicketNotFoundException::new);
-        return validateTicket(ticket);
+        return validateTicket(ticket, TicketValidationMethodEnum.MANUAL);
     }
 }
